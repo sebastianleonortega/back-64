@@ -1,7 +1,6 @@
 package com.base64.gamesback.auth.user.service.impl;
 
 import com.base64.gamesback.auth.user.dto.UserDto;
-import com.base64.gamesback.auth.user.dto.UserResponse;
 import com.base64.gamesback.auth.user.dto.UserUpdateRequest;
 import com.base64.gamesback.auth.user.dto.projection.userData;
 import com.base64.gamesback.auth.user.entity.User;
@@ -53,7 +52,6 @@ public class UserServiceImpl implements UserService {
 
         user.update(
                 request.getUserName().toLowerCase(Locale.ROOT),
-                user.getPassword(),
                 request.getProfileImage()
                 );
 

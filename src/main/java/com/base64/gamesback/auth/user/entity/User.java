@@ -47,9 +47,8 @@ public class User {
         return new User(userName, password, administrator, profileImag);
     }
 
-    public void update(String userName, String password, String profileImage){
+    public void update(String userName, String profileImage){
         this.userName = userName;
-        this.password = password;
         this.profileImage = profileImage;
     }
 }

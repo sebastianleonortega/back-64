@@ -16,11 +16,6 @@ public class UserUpdateRequest {
     @JsonProperty(value = "user_name")
     private String userName;
 
-    @NotNull
-    @NotEmpty
-    @JsonProperty(value = "password")
-    private String password;
-
     @JsonProperty(value = "profile_image")
     private String profileImage;
 
