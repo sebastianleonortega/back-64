@@ -6,14 +6,18 @@ spring:
     username: postgres
     password: 2408
   jpa:
-    hibernate:
-      ddl-auto: update
-      dialect: org.hibernate.dialect.PostgreSQLDialect
-      jdbc:
-        lob.non-contextual-creation: true
+    database: POSTGRESQL
+    generate-ddl: true
+    hibernate.ddl-auto: update
+    show-sql: true
+    open-in-view: true
     properties:
       hibernate:
-        show_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        hbm2ddl:
+          charset_name: UTF-8
+          import_files: scripts/user.sql
 
 security:
   jwt:

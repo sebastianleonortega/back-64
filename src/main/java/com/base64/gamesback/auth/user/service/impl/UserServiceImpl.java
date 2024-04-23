@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(UserUpdateRequest request, UUID userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("NO"));
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("No existe el usuario que desea actualizar"));
 
         user.update(
                 request.getUserName().toLowerCase(Locale.ROOT),
