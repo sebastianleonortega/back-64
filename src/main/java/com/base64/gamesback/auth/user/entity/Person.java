@@ -9,7 +9,6 @@ import java.util.UUID;
 
 @Getter
 @Data
-@Setter
 @Entity
 @Table(name = "person", schema = "main")
 public class Person {

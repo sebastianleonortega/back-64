@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "user", schema = "main")
 public class User {

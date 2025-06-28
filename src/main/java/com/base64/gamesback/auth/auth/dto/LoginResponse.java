@@ -9,7 +9,6 @@ import java.util.UUID;
 
 
 @Getter
-@Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LoginResponse {
 
@@ -43,6 +42,5 @@ public class LoginResponse {
     public static LoginResponse create(UUID userId, String useProfile, Boolean administrator, String personName, String personLastName, String token) {
         return new LoginResponse(userId, useProfile, administrator, personName, personLastName, token);
     }
-
 
 }
