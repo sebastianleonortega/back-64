@@ -3,8 +3,10 @@ package com.base64.gamesback.auth.user.repository;
 import com.base64.gamesback.auth.user.dto.projection.userData;
 import com.base64.gamesback.auth.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -20,5 +22,9 @@ public interface UserRepository  extends JpaRepository<User, UUID> {
             "p.person_email AS personEmail FROM main.user u INNER JOIN main.person p ON u.user_id = p.user_id WHERE u.user_id = :userId", nativeQuery = true)
     userData getUserId(@Param("userId") UUID userId);
 
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u SET u.password = :password WHERE u.userId = :userId")
+    void updatePasswordById(@Param("userId")  UUID userId, String password);
 
 }

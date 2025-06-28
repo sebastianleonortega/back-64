@@ -1,9 +1,9 @@
 package com.base64.gamesback.auth.user.controller;
 
+import com.base64.gamesback.auth.user.dto.UpdatePassword;
 import com.base64.gamesback.auth.user.dto.UserDto;
 import com.base64.gamesback.auth.user.dto.UserUpdateRequest;
 import com.base64.gamesback.auth.user.dto.projection.userData;
-import com.base64.gamesback.auth.user.entity.User;
 import com.base64.gamesback.auth.user.service.PersonService;
 import com.base64.gamesback.auth.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,7 +31,6 @@ public class UserController {
     public ResponseEntity<userData> getById(@Valid @PathVariable UUID userId){
         return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
     }
-
 
     @PostMapping("/")
     @Operation(description = "Create a new user" )
@@ -70,4 +69,13 @@ public class UserController {
         return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
+
+    @PutMapping("/update_password/{uuid}")
+    @Operation(description = "Update password")
+    @ApiResponse(responseCode = "200", description = "success")
+    public ResponseEntity<HttpStatus> updatePassword(@Valid @RequestBody UpdatePassword request,@Valid @PathVariable UUID uuid){
+        userService.updatePassword(request, uuid);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

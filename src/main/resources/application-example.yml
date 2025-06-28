@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/tu_db
+    username: tu_usuario
+    password: tu_password
+  mail:
+    username: correo@example.com
+    password: contraseña
