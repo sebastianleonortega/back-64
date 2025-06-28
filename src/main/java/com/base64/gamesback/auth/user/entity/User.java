@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -32,6 +33,15 @@ public class User {
     @Column(name = "profile_image", columnDefinition = "TEXT")
     private String profileImage;
 
+    @Column(name = "code_verification", length = 6)
+    private String codeVerification;
+
+    @Column(name = "code_verification_created_at")
+    private LocalDateTime codeVerificationCreatedAt;
+
+    @Column(name = "mfa_is_email")
+    private boolean mfaIsEmail;
+
     public User(String userName, String password, boolean administrator, String profileImage) {
         this.userName = userName;
         this.password = password;
@@ -50,5 +60,10 @@ public class User {
     public void update(String userName, String profileImage){
         this.userName = userName;
         this.profileImage = profileImage;
+    }
+
+    public void addCodeVerification(String code) {
+        this.codeVerification = code;
+        this.codeVerificationCreatedAt = LocalDateTime.now();
     }
 }

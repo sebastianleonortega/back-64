@@ -1,11 +1,10 @@
 package com.base64.gamesback.auth.user.service;
 
 
+import com.base64.gamesback.auth.user.dto.UpdatePassword;
 import com.base64.gamesback.auth.user.dto.UserDto;
-import com.base64.gamesback.auth.user.dto.UserResponse;
 import com.base64.gamesback.auth.user.dto.UserUpdateRequest;
 import com.base64.gamesback.auth.user.dto.projection.userData;
-import com.base64.gamesback.auth.user.entity.User;
 
 import java.util.UUID;
 
@@ -18,4 +17,6 @@ public interface UserService {
     void registerUser(UserDto request);
 
     void updateUser(UserUpdateRequest request, UUID userId);
+
+    void updatePassword(UpdatePassword request, UUID userId);
 }

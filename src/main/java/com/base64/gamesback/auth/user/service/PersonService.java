@@ -4,8 +4,6 @@ import com.base64.gamesback.auth.user.dto.PersonDto;
 import com.base64.gamesback.auth.user.dto.PersonUpdateRequest;
 import com.base64.gamesback.auth.user.entity.User;
 
-import java.util.UUID;
-
 public interface PersonService {
 
     Boolean existPersonByEmail(String personEmail);
