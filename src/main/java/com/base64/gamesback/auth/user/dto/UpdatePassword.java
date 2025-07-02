@@ -12,6 +12,7 @@ public class UpdatePassword {
 
 
     @NotBlank(message = "La contraseña es requerida")
+    @JsonProperty(value = "password")
     private String password;
 
     @NotBlank(message = "La confirmación de la contraseña es requerida")

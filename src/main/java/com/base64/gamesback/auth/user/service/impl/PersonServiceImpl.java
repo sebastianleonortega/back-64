@@ -25,18 +25,18 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Boolean existPersonByEmail(String personEmail) {
-        return personRepository.existsPersonByPersonEmail(personEmail.toLowerCase(Locale.ROOT));
+        return personRepository.existsPersonByEmail(personEmail.toLowerCase(Locale.ROOT));
     }
 
     @Override
     public Boolean existPersonByDocument(String personDocument) {
-        return personRepository.existsPersonByPersonDocument(personDocument.toLowerCase(Locale.ROOT));
+        return personRepository.existsPersonByDocumentNumber(personDocument.toLowerCase(Locale.ROOT));
     }
 
     @Override
     public void registerPerson(User user, PersonDto request) {
        Person person = Person.create(
-               request.getName(),
+               request.getFirstName(),
                request.getLastname(),
                request.getDocumentNumber(),
                request.getAddress(),
@@ -53,12 +53,12 @@ public class PersonServiceImpl implements PersonService {
         Person person = personRepository.findById(user.getPerson().getPersonId()).orElseThrow(() -> new ResourceNotFoundException("Person not found"));
 
         person.update(
-                request.getPersonName(),
-                request.getPersonLastName(),
-                request.getPersonDocument(),
-                request.getPersonAddress(),
-                request.getPersonPhone(),
-                request.getPersonEmail()
+                request.getFirstName(),
+                request.getLastName(),
+                request.getDocumentNumber(),
+                request.getAddress(),
+                request.getPhone(),
+                request.getEmail()
         );
         personRepository.save(person);
     }

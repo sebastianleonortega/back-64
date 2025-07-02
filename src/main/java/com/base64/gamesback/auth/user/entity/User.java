@@ -3,6 +3,7 @@ package com.base64.gamesback.auth.user.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -13,15 +14,13 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "uuid")
+    @UuidGenerator
     @Column(name = "user_id")
     private UUID userId;
 
-    @OneToOne(mappedBy = "user")
-    private Person person;
-
-    @Column(name = "user_name", unique = true)
-    private String userName;
+    @Column(name = "name", unique = true)
+    private String name;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -41,8 +40,11 @@ public class User {
     @Column(name = "mfa_is_email")
     private boolean mfaIsEmail;
 
-    public User(String userName, String password, boolean administrator, String profileImage) {
-        this.userName = userName;
+    @OneToOne(mappedBy = "user")
+    private Person person;
+
+    public User(String name, String password, boolean administrator, String profileImage) {
+        this.name = name;
         this.password = password;
         this.administrator = administrator;
         this.profileImage = profileImage;
@@ -52,12 +54,12 @@ public class User {
 
     }
 
-    public static User create( String userName, String password, boolean administrator, String profileImag){
-        return new User(userName, password, administrator, profileImag);
+    public static User create( String name, String password, boolean administrator, String profileImag){
+        return new User(name, password, administrator, profileImag);
     }
 
-    public void update(String userName, String profileImage){
-        this.userName = userName;
+    public void update(String name, String profileImage){
+        this.name = name;
         this.profileImage = profileImage;
     }
 

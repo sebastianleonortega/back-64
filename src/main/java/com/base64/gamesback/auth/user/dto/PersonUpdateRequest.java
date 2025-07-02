@@ -13,36 +13,36 @@ public class PersonUpdateRequest {
     @NotEmpty
     @NotNull
     @Size(min = 2, max = 40)
-    @JsonProperty(value = "person_name")
-    private String personName;
+    @JsonProperty(value = "first_name")
+    private String firstName;
 
     @NotEmpty
     @NotNull
     @Size(min = 2, max = 40)
-    @JsonProperty(value = "person_last_name")
-    private String personLastName;
+    @JsonProperty(value = "last_name")
+    private String lastName;
 
     @NotEmpty
     @NotNull
     @Size(max = 50)
-    @JsonProperty(value = "person_document")
-    private String personDocument;
+    @JsonProperty(value = "document_number")
+    private String documentNumber;
 
     @NotEmpty
     @NotNull
     @Size(min = 2, max = 50)
-    @JsonProperty(value = "person_address")
-    private String personAddress;
+    @JsonProperty(value = "address")
+    private String address;
 
     @NotEmpty
     @NotNull
     @Size(min = 8, max = 15)
-    @JsonProperty(value = "person_phone")
-    private String personPhone;
+    @JsonProperty(value = "phone")
+    private String phone;
 
     @NotEmpty
     @NotNull
     @Size(min = 2, max = 100)
-    @JsonProperty(value = "person_email")
-    private String personEmail;
+    @JsonProperty(value = "email")
+    private String email;
 }

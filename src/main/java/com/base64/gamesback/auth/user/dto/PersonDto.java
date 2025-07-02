@@ -15,42 +15,42 @@ public class PersonDto {
     @NotNull
     @NotEmpty
     @Size(min = 2, max = 50)
-    @JsonProperty(value = "person_name")
-    private String name;
+    @JsonProperty(value = "first_name")
+    private String firstName;
 
     @NotNull
     @NotEmpty
     @Size(min = 2, max = 50)
-    @JsonProperty(value = "person_last_name")
+    @JsonProperty(value = "last_name")
     private String lastname;
 
     @NotNull
     @NotEmpty
     @Size(max = 50)
-    @JsonProperty(value = "person_document")
+    @JsonProperty(value = "document_number")
     private String documentNumber;
 
     @NotNull
     @NotEmpty
     @Size(min = 8, max = 15)
-    @JsonProperty(value = "person_phone")
+    @JsonProperty(value = "phone")
     private String phone;
 
     @NotNull
     @Size(max = 50)
-    @JsonProperty(value = "person_address")
+    @JsonProperty(value = "address")
     private String address;
 
     @NotNull
     @NotEmpty
     @Size(max = 50)
     @Email
-    @JsonProperty(value = "person_email")
+    @JsonProperty(value = "email")
     private String email;
 
-    public PersonDto(String name, String lastname, String documentNumber, String phone, String address, String email) {
-        this.name = name;
-        this.lastname = lastname;
+    public PersonDto(String firstName, String lastName, String documentNumber, String phone, String address, String email) {
+        this.firstName = firstName;
+        this.lastname = lastName;
         this.documentNumber = documentNumber;
         this.phone = phone;
         this.address = address;

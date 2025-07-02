@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean existUserByName(String userName) {
-        return userRepository.existsUserByUserName(userName.toLowerCase(Locale.ROOT));
+        return userRepository.existsUserByName(userName.toLowerCase(Locale.ROOT));
     }
 
     @Override
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("No existe este usuario"));
 
         user.update(
-                request.getUserName().toLowerCase(Locale.ROOT),
+                request.getName().toLowerCase(Locale.ROOT),
                 request.getProfileImage()
                 );
 

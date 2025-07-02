@@ -12,9 +12,9 @@ import java.util.UUID;
 
 public interface UserRepository  extends JpaRepository<User, UUID> {
 
-    User getUserByUserName(String userName);
+    User getUserByName(String userName);
 
-    Boolean existsUserByUserName(String userName);
+    Boolean existsUserByName(String userName);
 
     @Query(value = "SELECT u.user_name AS userName, u.administrator AS administrator, u.profile_image AS profileImage, " +
             "p.person_name AS personName, p.person_last_name AS personLastName, " +

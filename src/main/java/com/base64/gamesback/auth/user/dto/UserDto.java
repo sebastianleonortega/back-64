@@ -11,7 +11,7 @@ public class UserDto {
 
     @NotNull
     @UserName
-    @JsonProperty(value = "user_name")
+    @JsonProperty(value = "name")
     private String name;
 
     @NotNull

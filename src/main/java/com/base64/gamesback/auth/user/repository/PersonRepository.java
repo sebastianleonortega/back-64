@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface PersonRepository extends JpaRepository<Person, UUID> {
 
-    Boolean existsPersonByPersonEmail(String personEmail);
+    Boolean existsPersonByEmail(String personEmail);
 
-    Boolean existsPersonByPersonDocument(String personDocument);
+    Boolean existsPersonByDocumentNumber(String personDocument);
 }

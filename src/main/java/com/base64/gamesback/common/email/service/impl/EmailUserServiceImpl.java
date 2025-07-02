@@ -31,7 +31,7 @@ public class EmailUserServiceImpl implements EmailUserService {
     @Override
     public void sendCodeVerification(User user) {
         String body = emailTemplateService.getEmailTemplateByName("two_factor_authentication")
-                .replaceAll("person_name", user.getPerson().getPersonName())
+                .replaceAll("person_name", user.getPerson().getFirstName() + " " + user.getPerson().getLastName())
                 .replace("verification_code_1", String.valueOf(user.getCodeVerification().charAt(0)))
                 .replace("verification_code_2", String.valueOf(user.getCodeVerification().charAt(1)))
                 .replace("verification_code_3", String.valueOf(user.getCodeVerification().charAt(2)))
@@ -40,7 +40,7 @@ public class EmailUserServiceImpl implements EmailUserService {
                 .replace("verification_code_6", String.valueOf(user.getCodeVerification().charAt(5)));
         body = body.replaceAll("current_year", String.valueOf(Year.now().getValue()));
 
-        EmailRequest emailRequest = EmailRequest.create(user.getPerson().getPersonEmail(), "Tu código de verificación", body);
+        EmailRequest emailRequest = EmailRequest.create(user.getPerson().getEmail(), "Tu código de verificación", body);
         emailDeliveryService.send(emailRequest);
     }
 

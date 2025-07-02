@@ -9,7 +9,7 @@ import lombok.Getter;
 public class UserResponse {
 
     @NotNull
-    @JsonProperty(value = "user_name")
+    @JsonProperty(value = "name")
     private String name;
 
     @JsonProperty(value = "administrator")
