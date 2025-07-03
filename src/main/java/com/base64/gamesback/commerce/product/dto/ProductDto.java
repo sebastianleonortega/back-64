@@ -11,22 +11,18 @@ import java.util.UUID;
 @Getter
 public class ProductDto {
 
-    @NotNull
     @JsonProperty(value = "name")
     private String name;
 
-    @NotNull
     @JsonProperty(value = "description")
     private String description;
 
-    @NotNull
     @JsonProperty(value = "code")
     private Number code;
 
     @JsonProperty(value = "price")
     private Number price;
 
-    @NotNull
     @JsonProperty(value = "stock")
     private Number stock;
 
@@ -39,4 +35,14 @@ public class ProductDto {
     @JsonProperty(value = "commerce_id")
     private UUID commerceId;
 
+    public ProductDto(String name, String description, Number code, Number price, Number stock, String image, UUID categoryId, UUID commerceId) {
+        this.name = name;
+        this.description = description;
+        this.code = code;
+        this.price = price;
+        this.stock = stock;
+        this.image = image;
+        this.categoryId = categoryId;
+        this.commerceId = commerceId;
+    }
 }

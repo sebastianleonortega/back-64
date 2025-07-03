@@ -30,7 +30,6 @@ public class Category {
     @Column(name = "update_at")
     private LocalDateTime updateAt;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<Product> products;
 

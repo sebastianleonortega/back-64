@@ -2,6 +2,7 @@ package com.base64.gamesback.commerce.product.controller;
 
 
 import com.base64.gamesback.commerce.product.dto.ProductDto;
+import com.base64.gamesback.commerce.product.dto.projection.ProductProjection;
 import com.base64.gamesback.commerce.product.dto.UpdateProductDto;
 import com.base64.gamesback.commerce.product.entity.Product;
 import com.base64.gamesback.commerce.product.service.ProductService;
@@ -37,7 +38,7 @@ public class ProductController {
     @GetMapping("/")
     @Operation(description = "get all")
     @ApiResponse(responseCode = "200", description = "success")
-    public  ResponseEntity<List<Product>> getAllProduct(){
+    public  ResponseEntity<List<ProductProjection>> getAllProduct(){
         return new ResponseEntity<>(productService.getAllProduct(), HttpStatus.OK);
     }
 

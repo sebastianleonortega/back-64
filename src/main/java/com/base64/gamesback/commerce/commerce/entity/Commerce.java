@@ -43,7 +43,6 @@ public class Commerce {
     private LocalDateTime updateAt;
 
     @OneToMany(mappedBy = "commerce")
-    @JsonIgnore
     private List<Product> products;
 
     public Commerce() {

@@ -4,13 +4,13 @@ package com.base64.gamesback.auth.user.service;
 import com.base64.gamesback.auth.user.dto.UpdatePassword;
 import com.base64.gamesback.auth.user.dto.UserDto;
 import com.base64.gamesback.auth.user.dto.UserUpdateRequest;
-import com.base64.gamesback.auth.user.dto.projection.userData;
+import com.base64.gamesback.auth.user.dto.projection.UserProjection;
 
 import java.util.UUID;
 
 public interface UserService {
 
-    userData getUserById(UUID userId);
+    UserProjection getUserById(UUID userId);
 
     Boolean existUserByName(String userName);
 

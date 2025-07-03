@@ -5,6 +5,7 @@ import com.base64.gamesback.commerce.category.service.CategoryService;
 import com.base64.gamesback.commerce.commerce.entity.Commerce;
 import com.base64.gamesback.commerce.commerce.service.CommerceService;
 import com.base64.gamesback.commerce.product.dto.ProductDto;
+import com.base64.gamesback.commerce.product.dto.projection.ProductProjection;
 import com.base64.gamesback.commerce.product.dto.UpdateProductDto;
 import com.base64.gamesback.commerce.product.entity.Product;
 import com.base64.gamesback.commerce.product.repository.ProductRepository;
@@ -34,8 +35,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProduct() {
-        return productRepository.findAll();
+    public List<ProductProjection> getAllProduct() {
+        return productRepository.getAllProductDto();
+    }
+
+    @Override
+    public List<ProductDto> getAllProductDto() {
+
+        return productRepository.getProductsAll();
     }
 
     @Override

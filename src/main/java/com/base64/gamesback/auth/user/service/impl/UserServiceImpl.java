@@ -3,7 +3,7 @@ package com.base64.gamesback.auth.user.service.impl;
 import com.base64.gamesback.auth.user.dto.UpdatePassword;
 import com.base64.gamesback.auth.user.dto.UserDto;
 import com.base64.gamesback.auth.user.dto.UserUpdateRequest;
-import com.base64.gamesback.auth.user.dto.projection.userData;
+import com.base64.gamesback.auth.user.dto.projection.UserProjection;
 import com.base64.gamesback.auth.user.entity.User;
 import com.base64.gamesback.auth.user.repository.UserRepository;
 import com.base64.gamesback.auth.user.service.PersonService;
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public userData getUserById(UUID userId) {
+    public UserProjection getUserById(UUID userId) {
         return userRepository.getUserId(userId);
     }
 

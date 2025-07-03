@@ -3,7 +3,7 @@ package com.base64.gamesback.auth.user.controller;
 import com.base64.gamesback.auth.user.dto.UpdatePassword;
 import com.base64.gamesback.auth.user.dto.UserDto;
 import com.base64.gamesback.auth.user.dto.UserUpdateRequest;
-import com.base64.gamesback.auth.user.dto.projection.userData;
+import com.base64.gamesback.auth.user.dto.projection.UserProjection;
 import com.base64.gamesback.auth.user.service.PersonService;
 import com.base64.gamesback.auth.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<userData> getById(@Valid @PathVariable UUID userId){
+    public ResponseEntity<UserProjection> getById(@Valid @PathVariable UUID userId){
         return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
     }
 

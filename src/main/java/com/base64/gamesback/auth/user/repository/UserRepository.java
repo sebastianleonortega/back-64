@@ -1,12 +1,11 @@
 package com.base64.gamesback.auth.user.repository;
 
-import com.base64.gamesback.auth.user.dto.projection.userData;
+import com.base64.gamesback.auth.user.dto.projection.UserProjection;
 import com.base64.gamesback.auth.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -16,14 +15,12 @@ public interface UserRepository  extends JpaRepository<User, UUID> {
 
     Boolean existsUserByName(String userName);
 
-    @Query(value = "SELECT u.user_name AS userName, u.administrator AS administrator, u.profile_image AS profileImage, " +
-            "p.person_name AS personName, p.person_last_name AS personLastName, " +
-            "p.person_document AS personDocument, p.person_address AS personAddress, p.person_phone AS personPhone, " +
-            "p.person_email AS personEmail FROM main.user u INNER JOIN main.person p ON u.user_id = p.user_id WHERE u.user_id = :userId", nativeQuery = true)
-    userData getUserId(@Param("userId") UUID userId);
+    @Query(value = "SELECT u.name AS name, u.administrator AS administrator, u.profile_image AS profileImage, " +
+            "p.first_name AS firstName, p.last_name AS LastName, p.document_number AS documentNumber, p.address AS address, p.phone AS phone, " +
+            "p.email AS email FROM main.user u INNER JOIN main.person p ON u.user_id = p.user_id WHERE u.user_id = :userId", nativeQuery = true)
+    UserProjection getUserId(@Param("userId") UUID userId);
 
     @Modifying
-    @Transactional
     @Query("UPDATE User u SET u.password = :password WHERE u.userId = :userId")
     void updatePasswordById(@Param("userId")  UUID userId, String password);
 
