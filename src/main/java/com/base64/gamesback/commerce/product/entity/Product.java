@@ -2,12 +2,14 @@ package com.base64.gamesback.commerce.product.entity;
 
 import com.base64.gamesback.commerce.category.entity.Category;
 import com.base64.gamesback.commerce.commerce.entity.Commerce;
+import com.base64.gamesback.commerce.tax.entity.Tax;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -53,6 +55,16 @@ public class Product {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JoinTable(
+            name = "product_tax", schema = "main",
+            joinColumns = @JoinColumn(name = "product_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "tax_id", nullable = false),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"product_id", "tax_id"}, name = "uc_product_tax")
+    )
+    private List<Tax> taxes;
+
+
     public Product() {
 
     }
@@ -87,5 +99,9 @@ public class Product {
 
     public void addCommerce(Commerce commerce){
         this.commerce = commerce;
+    }
+
+    public void addTax(List<Tax> taxes){
+        this.taxes = taxes;
     }
 }

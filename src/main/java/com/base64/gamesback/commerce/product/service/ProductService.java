@@ -14,7 +14,7 @@ public interface ProductService {
 
     List<ProductProjection> getAllProduct();
 
-    List<ProductDto> getAllProductDto();
+//    List<ProductDto> getAllProductDto();
 
     void updateProduct(UpdateProductDto updateProductDto, UUID uuid);
 

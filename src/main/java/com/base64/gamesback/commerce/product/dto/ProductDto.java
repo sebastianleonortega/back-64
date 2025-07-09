@@ -1,10 +1,12 @@
 package com.base64.gamesback.commerce.product.dto;
 
+import com.base64.gamesback.commerce.tax.entity.Tax;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -35,7 +37,10 @@ public class ProductDto {
     @JsonProperty(value = "commerce_id")
     private UUID commerceId;
 
-    public ProductDto(String name, String description, Number code, Number price, Number stock, String image, UUID categoryId, UUID commerceId) {
+    @JsonProperty(value = "tax_id")
+    private List<String> taxes;
+
+    public ProductDto(String name, String description, Number code, Number price, Number stock, String image, UUID categoryId, UUID commerceId, List<String> taxes) {
         this.name = name;
         this.description = description;
         this.code = code;
@@ -44,5 +49,6 @@ public class ProductDto {
         this.image = image;
         this.categoryId = categoryId;
         this.commerceId = commerceId;
+        this.taxes = taxes;
     }
 }

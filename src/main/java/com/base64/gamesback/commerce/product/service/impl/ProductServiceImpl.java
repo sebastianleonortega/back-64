@@ -10,6 +10,8 @@ import com.base64.gamesback.commerce.product.dto.UpdateProductDto;
 import com.base64.gamesback.commerce.product.entity.Product;
 import com.base64.gamesback.commerce.product.repository.ProductRepository;
 import com.base64.gamesback.commerce.product.service.ProductService;
+import com.base64.gamesback.commerce.tax.entity.Tax;
+import com.base64.gamesback.commerce.tax.service.TaxService;
 import com.base64.gamesback.common.exception_handler.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +24,13 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final CommerceService commerceService;
     private final CategoryService categoryService;
+    private final TaxService taxService;
 
-    public ProductServiceImpl(ProductRepository productRepository, CommerceService commerceService, CategoryService categoryService) {
+    public ProductServiceImpl(ProductRepository productRepository, CommerceService commerceService, CategoryService categoryService, TaxService taxService) {
         this.productRepository = productRepository;
         this.commerceService = commerceService;
         this.categoryService = categoryService;
+        this.taxService = taxService;
     }
 
     @Override
@@ -36,14 +40,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductProjection> getAllProduct() {
-        return productRepository.getAllProductDto();
+        return productRepository.findAllProjectedBy();
     }
 
-    @Override
-    public List<ProductDto> getAllProductDto() {
-
-        return productRepository.getProductsAll();
-    }
+//    @Override
+//    public List<ProductDto> getAllProductDto() {
+//
+//        return productRepository.getProductsAll();
+//    }
 
     @Override
     public void updateProduct(UpdateProductDto request, UUID uuid) {
@@ -73,8 +77,10 @@ public class ProductServiceImpl implements ProductService {
         );
         Category category = categoryService.getCategoryById(request.getCategoryId());
         Commerce commerce = commerceService.GetCommerceById(request.getCommerceId());
+        List<Tax> taxes = taxService.getTaxesById(request.getTaxes());
         product.addCategory(category);
         product.addCommerce(commerce);
+        product.addTax(taxes);
         productRepository.save(product);
     }
 

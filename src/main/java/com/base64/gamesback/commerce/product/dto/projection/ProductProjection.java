@@ -1,5 +1,8 @@
 package com.base64.gamesback.commerce.product.dto.projection;
 
+import com.base64.gamesback.commerce.tax.dto.projection.TaxProjection;
+
+import java.util.List;
 import java.util.UUID;
 
 public interface ProductProjection {
@@ -18,6 +21,8 @@ public interface ProductProjection {
 
     UUID getCategoryId();
 
-    UUID getCommerceId();
+//    UUID getCommerceId();
+
+    List<TaxProjection> getTaxes();
 
 }

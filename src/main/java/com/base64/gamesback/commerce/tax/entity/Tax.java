@@ -1,10 +1,12 @@
 package com.base64.gamesback.commerce.tax.entity;
 
+import com.base64.gamesback.commerce.product.entity.Product;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -29,4 +31,8 @@ public class Tax {
 
     @Column(name = "update_at")
     private LocalDateTime updateAt;
+
+    @ManyToMany(mappedBy = "taxes")
+    private List<Product> products;
+
 }
