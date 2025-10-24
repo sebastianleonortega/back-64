@@ -3,19 +3,19 @@ package com.base64.gamesback.commerce.product.entity;
 import com.base64.gamesback.commerce.category.entity.Category;
 import com.base64.gamesback.commerce.commerce.entity.Commerce;
 import com.base64.gamesback.commerce.tax.entity.Tax;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.base64.gamesback.common.audit.AuditEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Entity
 @Table(name = "product", schema = "main")
-public class Product {
+public class Product extends AuditEntity {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -30,22 +30,16 @@ public class Product {
     private String description;
 
     @Column(name = "code")
-    private Number code;
+    private Integer code;
 
     @Column(name = "price")
-    private Number price;
+    private BigDecimal price;
 
     @Column(name = "stock")
-    private Number stock;
+    private Integer stock;
 
     @Column(name = "image", columnDefinition = "TEXT")
     private String image;
-
-    @Column(name = "create_at")
-    private LocalDateTime createAt;
-
-    @Column(name = "update_at")
-    private LocalDateTime updateAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "commerce_id", nullable = false)
@@ -69,28 +63,26 @@ public class Product {
 
     }
 
-    public Product(String name, String description, Number code, Number price, Number stock, String image) {
+    public Product(String name, String description, Integer code, BigDecimal price, Integer stock, String image) {
         this.name = name;
         this.description = description;
         this.code = code;
         this.price = price;
         this.stock = stock;
         this.image = image;
-        this.createAt = LocalDateTime.now();
     }
 
-    public static Product  create(String name, String description, Number code, Number price, Number stock, String image){
+    public static Product  create(String name, String description, Integer code, BigDecimal price, Integer stock, String image){
         return new Product(name, description, code, price, stock, image);
     }
 
-    public  void  update(String name, String description, Number code, Number price, Number stock, String image){
+    public  void  update(String name, String description, Integer code, BigDecimal price, Integer stock, String image){
         this.name = name;
         this.description = description;
         this.code = code;
         this.price = price;
         this.stock = stock;
         this.image = image;
-        this.updateAt = LocalDateTime.now();
     }
 
     public void addCategory(Category category){

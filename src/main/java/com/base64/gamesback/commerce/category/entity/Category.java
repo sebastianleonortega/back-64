@@ -1,19 +1,18 @@
 package com.base64.gamesback.commerce.category.entity;
 
 import com.base64.gamesback.commerce.product.entity.Product;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.base64.gamesback.common.audit.AuditEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Entity
 @Table(name = "category", schema = "main")
-public class Category {
+public class Category  extends AuditEntity {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -24,12 +23,6 @@ public class Category {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "create_at")
-    private LocalDateTime createAt;
-
-    @Column(name = "update_at")
-    private LocalDateTime updateAt;
-
     @OneToMany(mappedBy = "category")
     private List<Product> products;
 
@@ -37,9 +30,7 @@ public class Category {
         this.name = name;
     }
 
-    public Category() {
-
-    }
+    public Category() {}
 
     public static Category create(String name){
         return new Category(name);

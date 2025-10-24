@@ -2,9 +2,9 @@ package com.base64.gamesback.commerce.product.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Getter
@@ -20,14 +20,14 @@ public class UpdateProductDto {
 
     @NotNull
     @JsonProperty(value = "code")
-    private Number code;
+    private Integer code;
 
     @JsonProperty(value = "price")
-    private Number price;
+    private BigDecimal price;
 
     @NotNull
     @JsonProperty(value = "stock")
-    private Number stock;
+    private Integer stock;
 
     @JsonProperty(value = "image")
     private String image;
