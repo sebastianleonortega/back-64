@@ -7,7 +7,7 @@ import com.base64.gamesback.auth.user.entity.User;
 import com.base64.gamesback.auth.user.repository.UserRepository;
 import com.base64.gamesback.common.email.dto.EmailWelcome;
 import com.base64.gamesback.common.email.service.EmailUserService;
-import com.base64.gamesback.common.exception_handler.AccessDeniedException;
+import com.base64.gamesback.common.exception.AccessDeniedException;
 import com.base64.gamesback.security.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
