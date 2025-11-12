@@ -36,4 +36,8 @@ public class Category  extends AuditEntity {
         return new Category(name);
     }
 
+    public void update(String name){
+        this.name = name;
+    }
+
 }
