@@ -3,6 +3,7 @@ package com.base64.gamesback.commerce.commerce.service;
 import com.base64.gamesback.commerce.commerce.dto.CommerceDto;
 import com.base64.gamesback.commerce.commerce.entity.Commerce;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface CommerceService {
@@ -10,6 +11,8 @@ public interface CommerceService {
     CommerceDto findCommerceById(UUID id);
 
     Commerce getCommerceById(UUID id);
+
+    List<CommerceDto> getAllCommerce();
 
    void createCommerce(CommerceDto commerceDto);
 

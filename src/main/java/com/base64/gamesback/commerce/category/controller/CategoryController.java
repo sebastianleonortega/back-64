@@ -2,7 +2,6 @@ package com.base64.gamesback.commerce.category.controller;
 
 import com.base64.gamesback.commerce.category.dto.CategoryDto;
 import com.base64.gamesback.commerce.category.dto.ListCategoryDto;
-import com.base64.gamesback.commerce.category.entity.Category;
 import com.base64.gamesback.commerce.category.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

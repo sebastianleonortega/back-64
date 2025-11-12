@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller(value = "commerce")
@@ -35,6 +36,13 @@ public class CommerceController {
     @ApiResponse(responseCode = "200", description = "success")
     public ResponseEntity<CommerceDto> getCommerceById(@Valid @PathVariable UUID id){
         return new ResponseEntity<>(commerceService.findCommerceById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    @Operation( description = "get all commerce")
+    @ApiResponse(responseCode = "200", description = "success")
+    public ResponseEntity<List<CommerceDto>> getAllCommerce(){
+        return new ResponseEntity<>(commerceService.getAllCommerce(), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
