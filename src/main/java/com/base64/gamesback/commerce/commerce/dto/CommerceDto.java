@@ -20,4 +20,13 @@ public class CommerceDto {
 
     @JsonProperty(value = "phone")
     private String phone;
+
+    public CommerceDto(String name, String nit, String address, String email, String phone) {
+        this.name = name;
+        this.nit = nit;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+    }
+
 }

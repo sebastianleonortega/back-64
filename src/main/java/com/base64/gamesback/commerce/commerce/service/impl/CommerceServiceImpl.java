@@ -4,6 +4,8 @@ import com.base64.gamesback.commerce.commerce.dto.CommerceDto;
 import com.base64.gamesback.commerce.commerce.entity.Commerce;
 import com.base64.gamesback.commerce.commerce.repository.CommerceRepository;
 import com.base64.gamesback.commerce.commerce.service.CommerceService;
+import com.base64.gamesback.common.exception.AlreadyExistException;
+import com.base64.gamesback.common.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -17,14 +19,29 @@ public class CommerceServiceImpl implements CommerceService {
         this.commerceRepository = commerceRepository;
     }
 
+    @Override
+    public CommerceDto findCommerceById(UUID id) {
+      return commerceRepository
+              .findById(id)
+              .map(commerce -> new CommerceDto(
+                      commerce.getName(),
+                      commerce.getNit(),
+                      commerce.getAddress(),
+                      commerce.getEmail(),
+                      commerce.getPhone())
+              ).orElseThrow(()-> new ResourceNotFoundException("No existe el comercio."));
+    }
 
     @Override
-    public Commerce GetCommerceById(UUID id) {
-       return commerceRepository.findById(id).orElseThrow(()-> new RuntimeException("No existe el commerce."));
+    public Commerce getCommerceById(UUID id) {
+        return commerceRepository.findById(id).orElseThrow(() -> new  ResourceNotFoundException("No existe el comercio."));
     }
 
     @Override
     public void createCommerce(CommerceDto request) {
+        if (commerceRepository.existsCommerceByNameIgnoreCase(request.getName().trim())) {
+            throw new AlreadyExistException("Ya existe un comercio con este nombre.");
+        }
         Commerce commerce = Commerce.create(
                 request.getName(),
                 request.getNit(),
@@ -33,5 +50,27 @@ public class CommerceServiceImpl implements CommerceService {
                 request.getPhone()
         );
         commerceRepository.save(commerce);
+    }
+
+    @Override
+    public void updateCommerce(UUID id, CommerceDto request) {
+        if (commerceRepository.existsCommerceByNameIgnoreCaseAndCommerceIdNot(request.getName().trim(), id)) {
+            throw new AlreadyExistException("Ya existe un comercio con este nombre.");
+        }
+        Commerce commerce = commerceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No existe el comercio."));
+        commerce.update(
+                request.getName(),
+                request.getNit(),
+                request.getAddress(),
+                request.getEmail(),
+                request.getPhone()
+        );
+        commerceRepository.save(commerce);
+    }
+
+    @Override
+    public void deleteCommerceById(UUID id) {
+       Commerce commerce = commerceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No existe el comercio."));
+        commerceRepository.delete(commerce);
     }
 }

@@ -7,5 +7,8 @@ import java.util.UUID;
 
 public interface CommerceRepository extends JpaRepository<Commerce, UUID> {
 
-    Commerce getCommerceByCommerceId(UUID commerceId);
+    boolean existsCommerceByNameIgnoreCase(String name);
+
+    boolean existsCommerceByNameIgnoreCaseAndCommerceIdNot(String name, UUID commerceId);
+
 }

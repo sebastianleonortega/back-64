@@ -7,7 +7,13 @@ import java.util.UUID;
 
 public interface CommerceService {
 
-    Commerce GetCommerceById(UUID id);
+    CommerceDto findCommerceById(UUID id);
+
+    Commerce getCommerceById(UUID id);
 
    void createCommerce(CommerceDto commerceDto);
+
+   void updateCommerce(UUID id, CommerceDto commerceDto);
+
+   void deleteCommerceById(UUID id);
 }

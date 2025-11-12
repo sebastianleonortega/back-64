@@ -69,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
                 request.getImage()
         );
         Category category = categoryService.getCategoryById(request.getCategoryId());
-        Commerce commerce = commerceService.GetCommerceById(request.getCommerceId());
+        Commerce commerce = commerceService.getCommerceById(request.getCommerceId());
         List<Tax> taxes = taxService.getTaxesById(request.getTaxes());
         product.addCategory(category);
         product.addCommerce(commerce);
