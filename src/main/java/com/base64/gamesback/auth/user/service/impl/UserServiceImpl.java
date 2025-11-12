@@ -8,7 +8,7 @@ import com.base64.gamesback.auth.user.entity.User;
 import com.base64.gamesback.auth.user.repository.UserRepository;
 import com.base64.gamesback.auth.user.service.PersonService;
 import com.base64.gamesback.auth.user.service.UserService;
-import com.base64.gamesback.common.exception_handler.ResourceNotFoundException;
+import com.base64.gamesback.common.exception.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

@@ -1,10 +1,9 @@
 package com.base64.gamesback.commerce.tax.service.impl;
 
-import com.base64.gamesback.commerce.tax.dto.TaxDto;
 import com.base64.gamesback.commerce.tax.entity.Tax;
 import com.base64.gamesback.commerce.tax.repository.TaxRepository;
 import com.base64.gamesback.commerce.tax.service.TaxService;
-import com.base64.gamesback.common.exception_handler.ResourceNotFoundException;
+import com.base64.gamesback.common.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

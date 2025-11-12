@@ -4,7 +4,7 @@ import com.base64.gamesback.commerce.category.dto.SaveCategoryDto;
 import com.base64.gamesback.commerce.category.entity.Category;
 import com.base64.gamesback.commerce.category.repository.CategoryRepository;
 import com.base64.gamesback.commerce.category.service.CategoryService;
-import com.base64.gamesback.common.exception_handler.ResourceNotFoundException;
+import com.base64.gamesback.common.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

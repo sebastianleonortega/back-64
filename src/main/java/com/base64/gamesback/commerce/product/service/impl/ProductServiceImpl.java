@@ -12,7 +12,7 @@ import com.base64.gamesback.commerce.product.repository.ProductRepository;
 import com.base64.gamesback.commerce.product.service.ProductService;
 import com.base64.gamesback.commerce.tax.entity.Tax;
 import com.base64.gamesback.commerce.tax.service.TaxService;
-import com.base64.gamesback.common.exception_handler.ResourceNotFoundException;
+import com.base64.gamesback.common.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,12 +43,6 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAllProjectedBy();
     }
 
-//    @Override
-//    public List<ProductDto> getAllProductDto() {
-//
-//        return productRepository.getProductsAll();
-//    }
-
     @Override
     public void updateProduct(UpdateProductDto request, UUID uuid) {
         Product product = productRepository.findById(uuid).orElseThrow(() -> new ResourceNotFoundException("No existe el producto"));
@@ -63,7 +57,6 @@ public class ProductServiceImpl implements ProductService {
         );
         productRepository.save(product);
     }
-
 
     @Override
     public void createProduct(ProductDto request) {

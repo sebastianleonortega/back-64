@@ -5,13 +5,11 @@ import com.base64.gamesback.auth.user.dto.PersonUpdateRequest;
 import com.base64.gamesback.auth.user.entity.Person;
 import com.base64.gamesback.auth.user.entity.User;
 import com.base64.gamesback.auth.user.repository.PersonRepository;
-import com.base64.gamesback.auth.user.repository.UserRepository;
 import com.base64.gamesback.auth.user.service.PersonService;
-import com.base64.gamesback.common.exception_handler.ResourceNotFoundException;
+import com.base64.gamesback.common.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
-import java.util.UUID;
 
 @Service
 public class PersonServiceImpl implements PersonService {
