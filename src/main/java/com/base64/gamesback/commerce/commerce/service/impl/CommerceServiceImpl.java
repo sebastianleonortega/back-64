@@ -96,11 +96,10 @@ public class CommerceServiceImpl implements CommerceService {
         );
         commerceRepository.save(commerce);
 
-                ActivateCommerceDto activateCommerceDto = new ActivateCommerceDto(
-                        request.getName(),
-                        request.getEmail()
-                );
-
+        ActivateCommerceDto activateCommerceDto = new ActivateCommerceDto(
+                request.getName(),
+                request.getEmail()
+        );
         emailCommerceService.sendEmailActivation(activateCommerceDto);
     }
 

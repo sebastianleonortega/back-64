@@ -21,10 +21,8 @@ public class EmailCommerceServiceImpl implements EmailCommerceService {
 
     @Override
     public void sendEmailActivation(ActivateCommerceDto activateCommerceDto) {
-
-        String body = emailTemplateService.getEmailTemplateByName("welcome")
+        String body = emailTemplateService.getEmailTemplateByName("activate_commerce")
                 .replace("name_commerce", activateCommerceDto.getName());
-
         EmailRequest emailRequest = EmailRequest.create(activateCommerceDto.getEmail(), "Activa tu comercio", body);
         emailDeliveryService.send(emailRequest);
     }
