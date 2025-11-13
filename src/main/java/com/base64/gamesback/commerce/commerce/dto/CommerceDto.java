@@ -23,12 +23,16 @@ public class CommerceDto {
     @JsonProperty(value = "phone")
     private String phone;
 
-    public CommerceDto(String name, String nit, String address, String email, String phone) {
+    @JsonProperty(value = "status")
+    private String status;
+
+    public CommerceDto(String name, String nit, String address, String email, String phone, String status) {
         this.name = name;
         this.nit = nit;
         this.address = address;
         this.email = email;
         this.phone = phone;
+        this.status = status;
     }
 
 }

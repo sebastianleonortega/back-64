@@ -1,10 +1,12 @@
 package com.base64.gamesback.commerce.commerce.service.impl;
 
+import com.base64.gamesback.commerce.commerce.dto.ActivateCommerceDto;
 import com.base64.gamesback.commerce.commerce.dto.CommerceDto;
 import com.base64.gamesback.commerce.commerce.entity.Commerce;
 import com.base64.gamesback.commerce.commerce.entity.Commerce_;
 import com.base64.gamesback.commerce.commerce.repository.CommerceRepository;
 import com.base64.gamesback.commerce.commerce.service.CommerceService;
+import com.base64.gamesback.common.email.service.EmailCommerceService;
 import com.base64.gamesback.common.exception.AlreadyExistException;
 import com.base64.gamesback.common.exception.ResourceNotFoundException;
 import jakarta.persistence.EntityManager;
@@ -23,12 +25,14 @@ import java.util.UUID;
 public class CommerceServiceImpl implements CommerceService {
 
     private final CommerceRepository commerceRepository;
+    private final EmailCommerceService emailCommerceService;
 
     @PersistenceContext
     private EntityManager em;
 
-    public CommerceServiceImpl(CommerceRepository commerceRepository) {
+    public CommerceServiceImpl(CommerceRepository commerceRepository, EmailCommerceService emailCommerceService) {
         this.commerceRepository = commerceRepository;
+        this.emailCommerceService = emailCommerceService;
     }
 
     @Override
@@ -40,7 +44,8 @@ public class CommerceServiceImpl implements CommerceService {
                       commerce.getNit(),
                       commerce.getAddress(),
                       commerce.getEmail(),
-                      commerce.getPhone())
+                      commerce.getPhone(),
+                      commerce.getStatus())
               ).orElseThrow(()-> new ResourceNotFoundException("No existe el comercio."));
     }
 
@@ -64,7 +69,8 @@ public class CommerceServiceImpl implements CommerceService {
                             root.get(Commerce_.nit),
                             root.get(Commerce_.address),
                             root.get(Commerce_.email),
-                            root.get(Commerce_.phone)
+                            root.get(Commerce_.phone),
+                            root.get(Commerce_.status)
                     )
             );
             result = em.createQuery(cq).getResultList();
@@ -76,6 +82,7 @@ public class CommerceServiceImpl implements CommerceService {
 
     @Override
     public void createCommerce(CommerceDto request) {
+
         if (commerceRepository.existsCommerceByNameIgnoreCase(request.getName().trim())) {
             throw new AlreadyExistException("Ya existe un comercio con este nombre.");
         }
@@ -84,9 +91,17 @@ public class CommerceServiceImpl implements CommerceService {
                 request.getNit(),
                 request.getAddress(),
                 request.getEmail(),
-                request.getPhone()
+                request.getPhone(),
+                request.getStatus()
         );
         commerceRepository.save(commerce);
+
+                ActivateCommerceDto activateCommerceDto = new ActivateCommerceDto(
+                        request.getName(),
+                        request.getEmail()
+                );
+
+        emailCommerceService.sendEmailActivation(activateCommerceDto);
     }
 
     @Override
@@ -100,9 +115,18 @@ public class CommerceServiceImpl implements CommerceService {
                 request.getNit(),
                 request.getAddress(),
                 request.getEmail(),
-                request.getPhone()
+                request.getPhone(),
+                request.getStatus()
         );
         commerceRepository.save(commerce);
+    }
+
+    @Override
+    public void updateCommerceStatus(UUID id, String status) {
+        Commerce commerce = commerceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No existe el comercio."));
+
+
+        commerce.updateStatus(status);
     }
 
     @Override

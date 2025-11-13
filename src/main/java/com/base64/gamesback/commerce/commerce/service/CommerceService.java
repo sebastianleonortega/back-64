@@ -18,5 +18,7 @@ public interface CommerceService {
 
    void updateCommerce(UUID id, CommerceDto commerceDto);
 
+   void updateCommerceStatus(UUID id, String status);
+
    void deleteCommerceById(UUID id);
 }

@@ -17,5 +17,6 @@ public abstract class Commerce_ extends AuditEntity {
     public static volatile SingularAttribute<Commerce, String> address;
     public static volatile SingularAttribute<Commerce, String> email;
     public static volatile SingularAttribute<Commerce, String> phone;
+    public static volatile SingularAttribute<Commerce, String> status;
 
 }

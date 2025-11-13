@@ -35,28 +35,37 @@ public class Commerce extends AuditEntity {
     @Column(name = "phone")
     private String phone;
 
+    @Column(name = "status")
+    private String status;
+
     @OneToMany(mappedBy = "commerce")
     private List<Product> products;
 
     public Commerce() {}
 
-    public Commerce(String name, String nit, String address, String email, String phone) {
+    public Commerce(String name, String nit, String address, String email, String phone, String status) {
         this.name = name;
         this.nit = nit;
         this.address = address;
         this.email = email;
         this.phone = phone;
+        this.status = status;
     }
 
-    public static Commerce create(String name, String nit, String address, String email, String phone) {
-        return new Commerce(name, nit, address, email, phone);
+    public static Commerce create(String name, String nit, String address, String email, String phone, String status) {
+        return new Commerce(name, nit, address, email, phone, status);
     }
 
-    public void update(String name, String nit, String address, String email, String phone) {
+    public void update(String name, String nit, String address, String email, String phone, String status) {
         this.name = name;
         this.nit = nit;
         this.address = address;
         this.email = email;
         this.phone = phone;
+        this.status = status;
+    }
+
+    public void updateStatus(String status){
+        this.status = status;
     }
 }
