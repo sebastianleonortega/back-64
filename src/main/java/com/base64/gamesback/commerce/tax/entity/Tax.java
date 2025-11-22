@@ -1,6 +1,7 @@
 package com.base64.gamesback.commerce.tax.entity;
 
 import com.base64.gamesback.commerce.product.entity.Product;
+import com.base64.gamesback.common.audit.AuditEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.UuidGenerator;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Getter
 @Entity
 @Table(name = "tax", schema = "main")
-public class Tax {
+public class Tax extends AuditEntity {
 
     @Id
     @GeneratedValue
@@ -26,13 +27,23 @@ public class Tax {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "create_at")
-    private LocalDateTime createAt;
-
-    @Column(name = "update_at")
-    private LocalDateTime updateAt;
-
     @ManyToMany(mappedBy = "taxes")
     private List<Product> products;
+
+    public Tax() {}
+
+    public Tax(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public static Tax create(String name, String description) {
+        return new Tax(name, description);
+    }
+
+    public void update(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
 }

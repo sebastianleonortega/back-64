@@ -2,9 +2,9 @@ package com.base64.gamesback.commerce.product.controller;
 
 
 import com.base64.gamesback.commerce.product.dto.ProductDto;
-import com.base64.gamesback.commerce.product.dto.projection.ProductProjection;
 import com.base64.gamesback.commerce.product.dto.UpdateProductDto;
 import com.base64.gamesback.commerce.product.entity.Product;
+import com.base64.gamesback.commerce.product.repository.ProductCriteriaRepository;
 import com.base64.gamesback.commerce.product.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -22,27 +22,29 @@ public class ProductController {
 
 
     private final ProductService  productService;
+    private final ProductCriteriaRepository  productCriteriaRepository;
 
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, ProductCriteriaRepository productCriteriaRepository) {
         this.productService = productService;
+        this.productCriteriaRepository = productCriteriaRepository;
     }
 
     @GetMapping("/{uuid}")
     @Operation(description = "get by id")
     @ApiResponse(responseCode = "200", description = "success")
-    public ResponseEntity<Product> getProductById(@Valid @PathVariable UUID uuid){
-        return new ResponseEntity<>(productService.getProductById(uuid), HttpStatus.OK) ;
+    public ResponseEntity<ProductDto> getProductById(@Valid @PathVariable UUID uuid){
+        return new ResponseEntity<>(productCriteriaRepository.getProductById(uuid), HttpStatus.OK) ;
     }
 
-    @GetMapping("/")
-    @Operation(description = "get all")
+    @GetMapping("/all")
+    @Operation(description = "Get all products")
     @ApiResponse(responseCode = "200", description = "success")
-    public  ResponseEntity<List<ProductProjection>> getAllProduct(){
-        return new ResponseEntity<>(productService.getAllProduct(), HttpStatus.OK);
+    public  ResponseEntity<List<ProductDto>> getAllProduct(){
+        return new ResponseEntity<>(productCriteriaRepository.getAllProduct(), HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/save")
     @Operation(description = "create product")
     @ApiResponse(responseCode = "201", description = "created")
     public ResponseEntity<HttpStatus> create(@Valid @RequestBody ProductDto productDto){

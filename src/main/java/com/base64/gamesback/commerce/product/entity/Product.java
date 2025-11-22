@@ -58,10 +58,7 @@ public class Product extends AuditEntity {
     )
     private List<Tax> taxes;
 
-
-    public Product() {
-
-    }
+    public Product() {}
 
     public Product(String name, String description, Integer code, BigDecimal price, Integer stock, String image) {
         this.name = name;

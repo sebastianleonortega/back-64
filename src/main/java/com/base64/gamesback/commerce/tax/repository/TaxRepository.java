@@ -11,4 +11,8 @@ import java.util.UUID;
 public interface TaxRepository extends JpaRepository<Tax, UUID> {
 
     List<Tax> findAllByTaxIdIn(List<UUID> uuids);
+
+    boolean existsTaxByNameIgnoreCase(String name);
+
+    boolean existsTaxByNameIgnoreCaseAndTaxIdNot(String name, UUID uuid);
 }

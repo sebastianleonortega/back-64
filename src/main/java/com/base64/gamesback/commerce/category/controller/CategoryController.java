@@ -32,7 +32,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{categoryId}")
-    @Operation(description = "get all category" )
+    @Operation(description = "get category by id")
     @ApiResponse(responseCode = "200", description = "success")
     public ResponseEntity<CategoryDto> getAllCategoryById(@Valid @PathVariable UUID categoryId){
         return new ResponseEntity<>(categoryService.findCategoryById(categoryId), HttpStatus.OK) ;
@@ -43,7 +43,7 @@ public class CategoryController {
     @ApiResponse(responseCode = "201", description = "created")
     public ResponseEntity<HttpStatus> saveCategory(@Valid @RequestBody CategoryDto category){
         categoryService.saveCategory(category);
-        return new ResponseEntity<>( HttpStatus.OK) ;
+        return new ResponseEntity<>( HttpStatus.CREATED) ;
     }
 
     @PutMapping("/{categoryId}")
@@ -56,9 +56,9 @@ public class CategoryController {
 
     @DeleteMapping("/{categoryId}")
     @Operation(description = "delete category")
-    @ApiResponse(responseCode = "202", description = "success")
+    @ApiResponse(responseCode = "204", description = "success")
     public ResponseEntity<HttpStatus> deleteCategory(@Valid @PathVariable UUID categoryId){
         categoryService.deleteCategory(categoryId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
