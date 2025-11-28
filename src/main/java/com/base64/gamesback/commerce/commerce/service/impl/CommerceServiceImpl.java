@@ -8,8 +8,6 @@ import com.base64.gamesback.commerce.commerce.service.CommerceService;
 import com.base64.gamesback.common.email.service.EmailCommerceService;
 import com.base64.gamesback.common.exception.AlreadyExistException;
 import com.base64.gamesback.common.exception.ResourceNotFoundException;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +19,6 @@ public class CommerceServiceImpl implements CommerceService {
 
     private final CommerceRepository commerceRepository;
     private final EmailCommerceService emailCommerceService;
-
-    @PersistenceContext
-    private EntityManager em;
 
     public CommerceServiceImpl(CommerceRepository commerceRepository, EmailCommerceService emailCommerceService) {
         this.commerceRepository = commerceRepository;

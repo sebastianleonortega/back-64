@@ -13,8 +13,6 @@ import com.base64.gamesback.commerce.tax.entity.Tax;
 import com.base64.gamesback.commerce.tax.service.TaxService;
 import com.base64.gamesback.common.exception.AlreadyExistException;
 import com.base64.gamesback.common.exception.ResourceNotFoundException;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
