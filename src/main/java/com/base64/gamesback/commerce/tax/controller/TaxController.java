@@ -1,6 +1,7 @@
 package com.base64.gamesback.commerce.tax.controller;
 
 import com.base64.gamesback.commerce.tax.dto.TaxDto;
+import com.base64.gamesback.commerce.tax.repository.TaxCriteriaRepository;
 import com.base64.gamesback.commerce.tax.service.TaxService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -18,9 +19,11 @@ import java.util.UUID;
 public class TaxController {
 
     private final TaxService taxService;
+    private final TaxCriteriaRepository taxCriteriaRepository;
 
-    public TaxController(TaxService taxService) {
+    public TaxController(TaxService taxService, TaxCriteriaRepository taxCriteriaRepository) {
         this.taxService = taxService;
+        this.taxCriteriaRepository = taxCriteriaRepository;
     }
 
     @GetMapping("/{taxId}")
@@ -50,7 +53,7 @@ public class TaxController {
     @Operation(description = "Get all taxes")
     @ApiResponse(responseCode = "200", description = "success")
     public ResponseEntity<List<TaxDto>> getAllTaxes() {
-        return new ResponseEntity<>(taxService.getAllTaxes(), HttpStatus.OK);
+        return new ResponseEntity<>(taxCriteriaRepository.getAllTaxes(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{taxId}")

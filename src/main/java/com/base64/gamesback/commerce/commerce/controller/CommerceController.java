@@ -1,6 +1,7 @@
 package com.base64.gamesback.commerce.commerce.controller;
 
 import com.base64.gamesback.commerce.commerce.dto.CommerceDto;
+import com.base64.gamesback.commerce.commerce.repository.CommerceCriteriaRepository;
 import com.base64.gamesback.commerce.commerce.service.CommerceService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -18,9 +19,11 @@ import java.util.UUID;
 public class CommerceController {
 
     private final CommerceService commerceService;
+    private final CommerceCriteriaRepository commerceCriteriaRepository;
 
-    public CommerceController(CommerceService commerceService) {
+    public CommerceController(CommerceService commerceService, CommerceCriteriaRepository commerceCriteriaRepository) {
         this.commerceService = commerceService;
+        this.commerceCriteriaRepository = commerceCriteriaRepository;
     }
 
     @PostMapping("/")
@@ -42,7 +45,7 @@ public class CommerceController {
     @Operation( description = "get all commerce")
     @ApiResponse(responseCode = "200", description = "success")
     public ResponseEntity<List<CommerceDto>> getAllCommerce(){
-        return new ResponseEntity<>(commerceService.getAllCommerce(), HttpStatus.OK);
+        return new ResponseEntity<>(commerceCriteriaRepository.getAllCommerce(), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

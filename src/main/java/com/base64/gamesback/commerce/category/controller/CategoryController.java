@@ -2,6 +2,7 @@ package com.base64.gamesback.commerce.category.controller;
 
 import com.base64.gamesback.commerce.category.dto.CategoryDto;
 import com.base64.gamesback.commerce.category.dto.ListCategoryDto;
+import com.base64.gamesback.commerce.category.repository.CategoryCriteriaRepository;
 import com.base64.gamesback.commerce.category.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -19,16 +20,18 @@ import java.util.UUID;
 public class CategoryController {
 
     private final CategoryService categoryService;
+    private final CategoryCriteriaRepository categoryCriteriaRepository;
 
-    public CategoryController(CategoryService categoryService) {
+    public CategoryController(CategoryService categoryService, CategoryCriteriaRepository categoryCriteriaRepository) {
         this.categoryService = categoryService;
+        this.categoryCriteriaRepository = categoryCriteriaRepository;
     }
 
     @GetMapping("/all")
     @Operation(description = "get all category" )
     @ApiResponse(responseCode = "200", description = "success")
     public ResponseEntity<List<ListCategoryDto>> getAllCategories(){
-        return new ResponseEntity<>(categoryService.getAllCategories(), HttpStatus.OK);
+        return new ResponseEntity<>(categoryCriteriaRepository.getAllCategories(), HttpStatus.OK);
     }
 
     @GetMapping("/{categoryId}")

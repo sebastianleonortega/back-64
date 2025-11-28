@@ -50,31 +50,6 @@ public class TaxServiceImpl implements TaxService {
     }
 
     @Override
-    public List<TaxDto> getAllTaxes() {
-        List<TaxDto> result = null;
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        try {
-            CriteriaQuery<TaxDto> cq = cb.createQuery(TaxDto.class);
-            Root<Tax> root = cq.from(Tax.class);
-
-            cq.select(
-                    cb.construct(
-                            TaxDto.class,
-                            root.get(Tax_.name),
-                            root.get(Tax_.description)
-                    )
-            ).orderBy(
-                    cb.asc(root.get(Tax_.name))
-            );
-            result = em.createQuery(cq).getResultList();
-        } catch (Exception ex) {
-            log.error("Error en la criteria getAllTaxes [{}]", ex.getMessage());
-        }
-        em.close();
-        return result;
-    }
-
-    @Override
     public void createTax(TaxDto request) {
         if (taxRepository.existsTaxByNameIgnoreCase(request.getName())) {
             throw new AlreadyExistException("Ya existe una impuesto con el nombre: " + request.getName());

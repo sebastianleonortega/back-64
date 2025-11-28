@@ -3,7 +3,6 @@ package com.base64.gamesback.commerce.product.controller;
 
 import com.base64.gamesback.commerce.product.dto.ProductDto;
 import com.base64.gamesback.commerce.product.dto.UpdateProductDto;
-import com.base64.gamesback.commerce.product.entity.Product;
 import com.base64.gamesback.commerce.product.repository.ProductCriteriaRepository;
 import com.base64.gamesback.commerce.product.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;

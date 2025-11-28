@@ -30,9 +30,6 @@ public class ProductServiceImpl implements ProductService {
     private final CategoryService categoryService;
     private final TaxService taxService;
 
-    @PersistenceContext
-    private EntityManager em;
-
     public ProductServiceImpl(ProductRepository productRepository, CommerceService commerceService, CategoryService categoryService, TaxService taxService) {
         this.productRepository = productRepository;
         this.commerceService = commerceService;

@@ -12,8 +12,6 @@ public interface TaxService {
 
     List<Tax> getTaxesById(List<String> uuids);
 
-    List<TaxDto> getAllTaxes();
-
     void createTax(TaxDto taxDto);
 
     void updateTax(UUID uuid, TaxDto taxDto);
