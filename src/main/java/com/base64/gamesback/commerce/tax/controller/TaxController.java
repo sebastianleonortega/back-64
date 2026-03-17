@@ -19,11 +19,9 @@ import java.util.UUID;
 public class TaxController {
 
     private final TaxService taxService;
-    private final TaxCriteriaRepository taxCriteriaRepository;
 
-    public TaxController(TaxService taxService, TaxCriteriaRepository taxCriteriaRepository) {
+    public TaxController(TaxService taxService) {
         this.taxService = taxService;
-        this.taxCriteriaRepository = taxCriteriaRepository;
     }
 
     @GetMapping("/{taxId}")
@@ -53,7 +51,7 @@ public class TaxController {
     @Operation(description = "Get all taxes")
     @ApiResponse(responseCode = "200", description = "success")
     public ResponseEntity<List<TaxDto>> getAllTaxes() {
-        return new ResponseEntity<>(taxCriteriaRepository.getAllTaxes(), HttpStatus.OK);
+        return new ResponseEntity<>(taxService.getAllTaxes(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{taxId}")

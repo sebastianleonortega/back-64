@@ -5,6 +5,7 @@ import com.base64.gamesback.commerce.product.entity.Product_;
 import com.base64.gamesback.commerce.tax.dto.TaxDto;
 import com.base64.gamesback.commerce.tax.entity.Tax;
 import com.base64.gamesback.commerce.tax.entity.Tax_;
+import com.base64.gamesback.commerce.tax.repository.TaxCriteriaRepository;
 import com.base64.gamesback.commerce.tax.repository.TaxRepository;
 import com.base64.gamesback.commerce.tax.service.TaxService;
 import com.base64.gamesback.common.exception.AlreadyExistException;
@@ -27,12 +28,14 @@ import java.util.stream.Collectors;
 public class TaxServiceImpl implements TaxService {
 
     private final TaxRepository taxRepository;
+    private final TaxCriteriaRepository taxCriteriaRepository;
 
     @PersistenceContext
     private EntityManager em;
 
-    public TaxServiceImpl(TaxRepository taxRepository) {
+    public TaxServiceImpl(TaxRepository taxRepository, TaxCriteriaRepository taxCriteriaRepository) {
         this.taxRepository = taxRepository;
+        this.taxCriteriaRepository = taxCriteriaRepository;
     }
 
     @Override
@@ -102,5 +105,10 @@ public class TaxServiceImpl implements TaxService {
         }
         em.close();
         return result;
+    }
+
+    @Override
+    public List<TaxDto> getAllTaxes() {
+        return taxCriteriaRepository.getAllTaxes();
     }
 }

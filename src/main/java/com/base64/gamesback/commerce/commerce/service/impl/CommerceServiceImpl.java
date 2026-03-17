@@ -3,6 +3,7 @@ package com.base64.gamesback.commerce.commerce.service.impl;
 import com.base64.gamesback.commerce.commerce.dto.ActivateCommerceDto;
 import com.base64.gamesback.commerce.commerce.dto.CommerceDto;
 import com.base64.gamesback.commerce.commerce.entity.Commerce;
+import com.base64.gamesback.commerce.commerce.repository.CommerceCriteriaRepository;
 import com.base64.gamesback.commerce.commerce.repository.CommerceRepository;
 import com.base64.gamesback.commerce.commerce.service.CommerceService;
 import com.base64.gamesback.common.email.service.EmailCommerceService;
@@ -11,6 +12,7 @@ import com.base64.gamesback.common.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -18,10 +20,12 @@ import java.util.UUID;
 public class CommerceServiceImpl implements CommerceService {
 
     private final CommerceRepository commerceRepository;
+    private final CommerceCriteriaRepository commerceCriteriaRepository;
     private final EmailCommerceService emailCommerceService;
 
-    public CommerceServiceImpl(CommerceRepository commerceRepository, EmailCommerceService emailCommerceService) {
+    public CommerceServiceImpl(CommerceRepository commerceRepository, CommerceCriteriaRepository commerceCriteriaRepository, EmailCommerceService emailCommerceService) {
         this.commerceRepository = commerceRepository;
+        this.commerceCriteriaRepository = commerceCriteriaRepository;
         this.emailCommerceService = emailCommerceService;
     }
 
@@ -94,5 +98,10 @@ public class CommerceServiceImpl implements CommerceService {
     public void deleteCommerceById(UUID id) {
        Commerce commerce = commerceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No existe el comercio."));
         commerceRepository.delete(commerce);
+    }
+
+    @Override
+    public List<CommerceDto> getAllCommerce() {
+        return commerceCriteriaRepository.getAllCommerce();
     }
 }

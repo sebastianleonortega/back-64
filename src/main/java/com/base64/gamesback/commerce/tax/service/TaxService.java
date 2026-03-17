@@ -19,4 +19,6 @@ public interface TaxService {
     void deleteTax(UUID uuid);
 
     List<String> getAllTaxesIdByProductId(UUID productId);
+
+    List<TaxDto> getAllTaxes();
 }

@@ -7,6 +7,7 @@ import com.base64.gamesback.commerce.commerce.service.CommerceService;
 import com.base64.gamesback.commerce.product.dto.ProductDto;
 import com.base64.gamesback.commerce.product.dto.UpdateProductDto;
 import com.base64.gamesback.commerce.product.entity.Product;
+import com.base64.gamesback.commerce.product.repository.ProductCriteriaRepository;
 import com.base64.gamesback.commerce.product.repository.ProductRepository;
 import com.base64.gamesback.commerce.product.service.ProductService;
 import com.base64.gamesback.commerce.tax.entity.Tax;
@@ -24,12 +25,14 @@ import java.util.UUID;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductCriteriaRepository productCriteriaRepository;
     private final CommerceService commerceService;
     private final CategoryService categoryService;
     private final TaxService taxService;
 
-    public ProductServiceImpl(ProductRepository productRepository, CommerceService commerceService, CategoryService categoryService, TaxService taxService) {
+    public ProductServiceImpl(ProductRepository productRepository, ProductCriteriaRepository productCriteriaRepository, CommerceService commerceService, CategoryService categoryService, TaxService taxService) {
         this.productRepository = productRepository;
+        this.productCriteriaRepository = productCriteriaRepository;
         this.commerceService = commerceService;
         this.categoryService = categoryService;
         this.taxService = taxService;
@@ -78,5 +81,15 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(UUID uuid) {
         Product product = productRepository.findById(uuid).orElseThrow(() -> new ResourceNotFoundException("No existe el producto"));
         productRepository.delete(product);
+    }
+
+    @Override
+    public ProductDto getProductById(UUID uuid) {
+        return productCriteriaRepository.getProductById(uuid);
+    }
+
+    @Override
+    public List<ProductDto> getAllProduct() {
+        return productCriteriaRepository.getAllProduct();
     }
 }

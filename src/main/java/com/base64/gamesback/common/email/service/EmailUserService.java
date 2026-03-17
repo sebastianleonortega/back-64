@@ -1,6 +1,6 @@
 package com.base64.gamesback.common.email.service;
 
-import com.base64.gamesback.auth.user.entity.User;
+import com.base64.gamesback.user.entity.User;
 import com.base64.gamesback.common.email.dto.EmailWelcome;
 
 public interface EmailUserService {

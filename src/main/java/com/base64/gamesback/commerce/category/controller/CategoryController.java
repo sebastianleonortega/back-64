@@ -20,18 +20,16 @@ import java.util.UUID;
 public class CategoryController {
 
     private final CategoryService categoryService;
-    private final CategoryCriteriaRepository categoryCriteriaRepository;
 
-    public CategoryController(CategoryService categoryService, CategoryCriteriaRepository categoryCriteriaRepository) {
+    public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
-        this.categoryCriteriaRepository = categoryCriteriaRepository;
     }
 
     @GetMapping("/all")
     @Operation(description = "get all category" )
     @ApiResponse(responseCode = "200", description = "success")
     public ResponseEntity<List<ListCategoryDto>> getAllCategories(){
-        return new ResponseEntity<>(categoryCriteriaRepository.getAllCategories(), HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.getAllCategories(), HttpStatus.OK);
     }
 
     @GetMapping("/{categoryId}")

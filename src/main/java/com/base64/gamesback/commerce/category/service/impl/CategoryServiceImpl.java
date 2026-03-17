@@ -1,7 +1,9 @@
 package com.base64.gamesback.commerce.category.service.impl;
 
 import com.base64.gamesback.commerce.category.dto.CategoryDto;
+import com.base64.gamesback.commerce.category.dto.ListCategoryDto;
 import com.base64.gamesback.commerce.category.entity.Category;
+import com.base64.gamesback.commerce.category.repository.CategoryCriteriaRepository;
 import com.base64.gamesback.commerce.category.repository.CategoryRepository;
 import com.base64.gamesback.commerce.category.service.CategoryService;
 import com.base64.gamesback.common.exception.AlreadyExistException;
@@ -9,6 +11,7 @@ import com.base64.gamesback.common.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -16,9 +19,11 @@ import java.util.UUID;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final CategoryCriteriaRepository categoryCriteriaRepository;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository, CategoryCriteriaRepository categoryCriteriaRepository) {
         this.categoryRepository = categoryRepository;
+        this.categoryCriteriaRepository = categoryCriteriaRepository;
     }
 
     @Override
@@ -62,5 +67,10 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteCategory(UUID uuid) {
       Category category = categoryRepository.findById(uuid).orElseThrow(() -> new ResourceNotFoundException("No existe la categoria que desea eliminar"));
           categoryRepository.delete(category);
+    }
+
+    @Override
+    public List<ListCategoryDto> getAllCategories() {
+        return categoryCriteriaRepository.getAllCategories();
     }
 }

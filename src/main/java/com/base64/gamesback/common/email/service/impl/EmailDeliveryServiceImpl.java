@@ -1,6 +1,6 @@
 package com.base64.gamesback.common.email.service.impl;
 
-import com.base64.gamesback.auth.auth.exception.AuthenticationFailedException;
+import com.base64.gamesback.authorization.auth.exception.AuthenticationFailedException;
 import com.base64.gamesback.common.email.dto.EmailRequest;
 import com.base64.gamesback.common.email.entity.Email;
 import com.base64.gamesback.common.email.service.EmailDeliveryService;

@@ -19,28 +19,24 @@ import java.util.UUID;
 @RequestMapping("/product")
 public class ProductController {
 
-
     private final ProductService  productService;
-    private final ProductCriteriaRepository  productCriteriaRepository;
 
-
-    public ProductController(ProductService productService, ProductCriteriaRepository productCriteriaRepository) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
-        this.productCriteriaRepository = productCriteriaRepository;
     }
 
     @GetMapping("/{uuid}")
     @Operation(description = "get by id")
     @ApiResponse(responseCode = "200", description = "success")
     public ResponseEntity<ProductDto> getProductById(@Valid @PathVariable UUID uuid){
-        return new ResponseEntity<>(productCriteriaRepository.getProductById(uuid), HttpStatus.OK) ;
+        return new ResponseEntity<>(productService.getProductById(uuid), HttpStatus.OK) ;
     }
 
     @GetMapping("/all")
     @Operation(description = "Get all products")
     @ApiResponse(responseCode = "200", description = "success")
     public  ResponseEntity<List<ProductDto>> getAllProduct(){
-        return new ResponseEntity<>(productCriteriaRepository.getAllProduct(), HttpStatus.OK);
+        return new ResponseEntity<>(productService.getAllProduct(), HttpStatus.OK);
     }
 
     @PostMapping("/save")
